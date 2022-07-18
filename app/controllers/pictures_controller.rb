@@ -21,7 +21,9 @@ class PicturesController < ApplicationController
 
   # POST /pictures or /pictures.json
   def create
-    @picture = Picture.new(picture_params)
+    # @picture = Picture.new(picture_params)
+    # @picture.user_id = current_user.id
+    @picture = current_user.pictures.build(picture_params)
 
     respond_to do |format|
       if @picture.save
@@ -32,6 +34,12 @@ class PicturesController < ApplicationController
         format.json { render json: @picture.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def confirm
+    @picture = Picture.new(picture_params)
+    @picture.user_id = current_user.id 
+    render :new if @picture.invalid?
   end
 
   # PATCH/PUT /pictures/1 or /pictures/1.json
