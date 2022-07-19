@@ -27,7 +27,7 @@ class PicturesController < ApplicationController
   def create
   @picture = current_user.pictures.build(picture_params)
     if @picture.save
-      redirect_to pictures_path, notice: "Picture was successfully created." 
+      redirect_to pictures_path, notice: "投稿が作成されました。" 
     else
       render :new 
     end
@@ -42,7 +42,7 @@ class PicturesController < ApplicationController
   # PATCH/PUT /pictures/1 
   def update
     if @picture.update(picture_params)
-      redirect_to pictures_path, notice: "Picture was successfully updated." 
+      redirect_to pictures_path, notice: "投稿が更新されました。" 
     else
       render :edit
     end
@@ -51,7 +51,7 @@ class PicturesController < ApplicationController
   # DELETE /pictures/1 
   def destroy
     @picture.destroy
-      redirect_to pictures_path, notice: "Picture was successfully destroyed." 
+      redirect_to pictures_path, notice: "投稿が削除されました。" 
   end
 
   private

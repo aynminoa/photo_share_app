@@ -1,31 +1,30 @@
 <!-- <p id="notice"><%= notice %></p> -->
 
-<h1>Pictures</h1>
+<h1 class="mt-5">投稿一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>name</th>
-      <th>Content</th>
-      <th>Image</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @pictures.each do |picture| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= picture.user.name %></td>
-        <td><%= picture.content %></td>
-        <td><%= image_tag(picture.image.url) if picture.image && picture.image.url %></td>
-        <td><%= link_to 'Show', picture %></td>
-        <td><%= link_to 'Edit', edit_picture_path(picture) %></td>
-        <td><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th class="col-2">投稿者</th>
+        <th class="col-4">コメント</th>
+        <th class="col-2">画像</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+  
+    <tbody>
+      <% @pictures.each do |picture| %>
+        <tr>
+          <td><%= picture.user.name %></td>
+          <td><%= picture.content %></td>
+          <td><%= image_tag picture.image_url(:thumb) if picture.image.present? %></td>
+          <td class="pr-0"><%= link_to '詳細', picture, class:"btn btn-outline-primary" %></td>
+          <td class="pr-0 pl-1"><%= link_to '編集', edit_picture_path(picture), class:"btn btn-outline-primary" %></td>
+          <td class="pr-0 pl-1""><%= link_to '削除', picture, class:"btn btn-outline-primary", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 <br>
 
-<%= link_to 'New Picture', new_picture_path %>
+<%= link_to '新規投稿', new_picture_path, class:"btn btn-primary" %>
